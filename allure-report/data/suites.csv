@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue May 28 15:12:33 MSK 2024","Tue May 28 15:12:58 MSK 2024","24342","","org.example.ApiTests","","org.example.ApiTests","orderHistoryTest","Test OrderCancel",""
+"failed","Tue May 28 15:12:17 MSK 2024","Tue May 28 15:12:33 MSK 2024","16204","","org.example.ApiTests","","org.example.ApiTests","RT","Testing the addition(pos, neg)",""
+"passed","Tue May 28 15:11:52 MSK 2024","Tue May 28 15:12:17 MSK 2024","24413","","org.example.ApiTests","","org.example.ApiTests","cardTest","Test Card",""

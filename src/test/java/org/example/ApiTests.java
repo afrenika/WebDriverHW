@@ -1,12 +1,11 @@
 package org.example;
 
-import com.github.dzieciou.testing.curl.CurlLoggingRestAssuredConfigFactory;
+
 import io.qameta.allure.Allure;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.internal.shadowed.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
-import io.restassured.config.RestAssuredConfig;
 import io.restassured.response.Response;
 import org.codehaus.plexus.util.FileUtils;
 import org.junit.jupiter.api.*;
@@ -137,7 +136,7 @@ public class ApiTests {
     @Feature("Api")
     @Test
     @DisplayName("Test Card")
-    void cardTest() throws JsonProcessingException, InterruptedException {
+    void cardTest() {
         int count = driver.manage().logs().get(LogType.BROWSER).getAll().size();
         try{
         driver.get(ConfProperties.getProperty("mainPage"));
@@ -307,7 +306,7 @@ public class ApiTests {
     @Epic("Chrome")
     @Feature("Api")
     @DisplayName("Test OrderCancel")
-    void orderHistoryTest() throws InterruptedException {
+    void orderHistoryTest() {
         int count = driver.manage().logs().get(LogType.BROWSER).getAll().size();
         try{
         driver.get(ConfProperties.getProperty("mainPage"));
