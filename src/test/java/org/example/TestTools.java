@@ -19,4 +19,9 @@ public class TestTools {
             System.out.println(ex.getMessage());
         }
     }
+
+//    @Attachment(value = "Page Screenshot", type = "image/png")
+//public static byte[] saveScreenshotPNG(WebDriver driver) {
+//    return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+//}
 }

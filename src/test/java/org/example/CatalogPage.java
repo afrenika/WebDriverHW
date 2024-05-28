@@ -1,17 +1,15 @@
 package org.example;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.WheelInput;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.Arrays;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
-import static java.awt.SystemColor.window;
 
 public class CatalogPage {
 
@@ -34,6 +32,12 @@ public class CatalogPage {
     @FindBy(xpath = "//*[@id=\"FilterPrice\"]/h5/strong/a")
     public WebElement filterCostButton;
 
+
+    @FindBy(xpath = "//*[@id=\"CatalogueSection\"]/section/div[2]/div[2]/div/div[3]/div/button[1]")
+            public WebElement buy2;
+    @FindBy(xpath = "//*[@id=\"CatalogueSection\"]/section/div[2]/div[3]/div/div[3]/div/button[1]")
+            public WebElement buy3;
+
     public String[] brIdList = new String[] {"BrandCheckbox23","BrandCheckbox31","BrandCheckbox6", "BrandCheckbox7","BrandCheckbox20"};
 
     public void sortListButton(){
@@ -42,6 +46,38 @@ public class CatalogPage {
         select.selectByIndex(random.nextInt(6));
     }
 
+    @FindBy(xpath = "//*[contains(@class, 'navbar-tool-icon-box bg-light ')]")
+            public WebElement card;
+
+
+
+    public void scroll(WebElement webElement) throws InterruptedException {
+        new Actions(driver)
+                            .scrollToElement(webElement)
+                            .perform();
+    }
+    public void scrollAndClick(WebElement webElement) throws InterruptedException {
+        new Actions(driver)
+                            .scrollToElement(webElement)
+                            .perform();
+
+        Thread.sleep(400);
+        webElement.click();
+    }
+    public void clickToCard1() throws InterruptedException {
+        card.click();
+        Thread.sleep(500);
+    }
+
+    public void clickToCard2() throws InterruptedException {
+        System.out.println("ok");
+        scrollAndClick(buy2);
+        Thread.sleep(500);
+        scrollAndClick(card);
+//        scroll(card);
+//        card.click();
+//        Thread.sleep(500);
+    }
 
     public int clickBrand() throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver; js.executeScript("window.scrollBy(0,200)");
@@ -49,7 +85,7 @@ public class CatalogPage {
         brandButton.click();
         Thread.sleep(300);
         int i = random.nextInt(brIdList.length);
-        js.executeScript("window.scrollBy(0,300)");
+//        scroll(buy1);
         Thread.sleep(400);
         WebElement brandButton = driver.findElement(By.xpath("//*[contains(@id, '" + brIdList[i]+"')]"));
 //        System.out.println(brIdList[i]);

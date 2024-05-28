@@ -4,11 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-
-import javax.swing.*;
-import java.util.List;
 
 public class HistoryPage {
 
@@ -20,7 +17,7 @@ public class HistoryPage {
         this.driver = driver;
     }
 
-    int time = 550;
+    int time = 200;
 
 //    @FindBy(xpath = "//*[contains(@id, 'navbarDropdownMenuLink-4')]")
 //    private WebElement logoutMenu1;
@@ -65,7 +62,7 @@ public class HistoryPage {
             sum += historySize;
 
             strImage = driver.findElement(By.xpath("//div/section/nav/ul/li[last()]"));
-            js.executeScript("arguments[0].scrollIntoView();", strImage);
+            new Actions(driver).scrollToElement(strImage).perform();
             Thread.sleep(time);
             strImage.click();
         }

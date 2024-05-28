@@ -7,22 +7,189 @@
   <name>Archetype - WebDriverHW1</name>
   <url>http://maven.apache.org</url>
 
-   <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+  <properties>
+
+     <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+   <junit-platform-surefire-provider.version>1.1.0</junit-platform-surefire-provider.version>
+   <aspectj.version>1.8.10</aspectj.version>
+   <allure-junit5.version>2.6.0</allure-junit5.version>
+    <allure.version>2.25.0</allure.version>
+      <http.client.version>4.5.3</http.client.version>
+<curl.logger.version>1.0.5</curl.logger.version>
+
+
+</properties>
+
+<dependencyManagement>
+    <dependencies>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.19.1</version>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-bom</artifactId>
+            <version>${allure.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+
+
+  <dependencies>
+
+
+<dependency>
+   <groupId>org.apache.httpcomponents</groupId>
+   <artifactId>httpclient</artifactId>
+   <version>${http.client.version}</version>
+</dependency>
+<dependency>
+   <groupId>com.github.dzieciou.testing</groupId>
+   <artifactId>curl-logger</artifactId>
+   <version>${curl.logger.version}</version>
+</dependency>
+   <dependency>
+              <groupId>org.seleniumhq.selenium</groupId>
+              <artifactId>selenium-java</artifactId>
+              <version>4.19.1</version>
+          </dependency>
+
+      <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+      <!-- для отчёта в Allure API -->
 <dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>4.13.2</version>
-    <scope>test</scope>
+  <groupId>io.qameta.allure</groupId>
+  <artifactId>allure-rest-assured</artifactId>
+  <version>2.17.0</version>
 </dependency>
 
-    </dependencies>
+<!-- для отправки API -->
+<dependency>
+  <groupId>io.rest-assured</groupId>
+  <artifactId>rest-assured</artifactId>
+  <version>5.1.0</version>
+  <scope>test</scope>
+</dependency>
 
+<!-- для отправки API -->
+<dependency>
+  <groupId>org.apache.maven</groupId>
+  <artifactId>maven-plugin-api</artifactId>
+  <version>3.6.3</version>
+  <scope>test</scope>
+</dependency>
+
+<!--&lt;!&ndash;      <dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;  <groupId>ru.yandex.qatools.allure</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;  <artifactId>allure-junit-adaptor</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;  <version>1.5.2</version>&ndash;&gt;-->
+<!--&lt;!&ndash;</dependency>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;&lt;!&ndash; генерация отчёта allure &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;  <groupId>io.qameta.allure</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;  <artifactId>allure-junit5</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;  <version>2.17.0</version>&ndash;&gt;-->
+<!--&lt;!&ndash;  <scope>test</scope>&ndash;&gt;-->
+<!--&lt;!&ndash;</dependency>&ndash;&gt;-->
+
+<!--<dependency>-->
+<!--  <groupId>io.qameta.allure</groupId>-->
+<!--  <artifactId>allure-java-commons</artifactId>-->
+<!--  <version>2.17.0</version>-->
+<!--  <scope>test</scope>-->
+<!--</dependency>-->
+
+<!--      <dependency>-->
+<!--        <groupId>io.qameta.allure</groupId>-->
+<!--        <artifactId>allure-junit5</artifactId>-->
+<!--        <scope>test</scope>-->
+<!--    </dependency>-->
+
+
+      <!-- для отчёта в Allure API -->
+<!--<dependency>-->
+<!--  <groupId>io.qameta.allure</groupId>-->
+<!--  <artifactId>allure-rest-assured</artifactId>-->
+<!--  <version>2.17.0</version>-->
+<!--</dependency>-->
+
+<!--&lt;!&ndash; для отправки API &ndash;&gt;-->
+<!--<dependency>-->
+<!--  <groupId>io.rest-assured</groupId>-->
+<!--  <artifactId>rest-assured</artifactId>-->
+<!--  <version>5.1.0</version>-->
+<!--  <scope>test</scope>-->
+<!--</dependency>-->
+
+<!--&lt;!&ndash; для отправки API &ndash;&gt;-->
+<!--<dependency>-->
+<!--  <groupId>org.apache.maven</groupId>-->
+<!--  <artifactId>maven-plugin-api</artifactId>-->
+<!--  <version>3.6.3</version>-->
+<!--  <scope>test</scope>-->
+<!--</dependency>-->
+
+  </dependencies>
+
+
+    <build>
+    <plugins>
+        <plugin>
+				<groupId>io.qameta.allure</groupId>
+				<artifactId>allure-maven</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<reportDirectory>${basedir}/target/allure-report</reportDirectory>
+					<resultsDirectory>${basedir}/target/allure-results</resultsDirectory>
+				</configuration>
+			</plugin>
+
+        <plugin>
+         <artifactId>maven-surefire-plugin</artifactId>
+         <version>${maven-surefire-plugin.version}</version>
+         <configuration>
+            <testFailureIgnore>false</testFailureIgnore>
+            <argLine>
+               -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+            </argLine>
+            <systemProperties>
+               <property>
+                  <name>junit.jupiter.extensions.autodetection.enabled</name>
+                  <value>true</value>
+               </property>
+               <property>
+                  <name>allure.results.directory</name>
+                  <value>${basedir}/target/allure-results</value>
+               </property>
+            </systemProperties>
+         </configuration>
+         <dependencies>
+            <dependency>
+               <groupId>org.junit.platform</groupId>
+               <artifactId>junit-platform-surefire-provider</artifactId>
+               <version>${junit-platform-surefire-provider.version}</version>
+            </dependency>
+            <dependency>
+               <groupId>org.aspectj</groupId>
+               <artifactId>aspectjweaver</artifactId>
+               <version>${aspectj.version}</version>
+            </dependency>
+         </dependencies>
+      </plugin><plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><configuration><source>10</source><target>10</target><compilerArgs>--enable-preview</compilerArgs></configuration></plugin>
+
+
+    </plugins>
+    </build>
 </project>
